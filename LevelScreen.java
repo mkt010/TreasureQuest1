@@ -269,7 +269,7 @@ public class LevelScreen extends BaseScreen
             messageLabel.setFontScale(2);
             messageLabel.setVisible(true);
             treasure.remove();
-            gameOver = true;
+            gameOver = true; //change this when we have a next level
         }
 
         if ( health <= 0 )
@@ -280,6 +280,7 @@ public class LevelScreen extends BaseScreen
             messageLabel.setVisible(true);
             hero.remove();
             gameOver = true;
+            //change this - maybe a restart game option
         }
 
         for (BaseActor arrow : BaseActor.getList(mainStage, "Arrow"))
