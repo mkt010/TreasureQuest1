@@ -10,10 +10,21 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.math.MathUtils;
+
 public class LevelScreen extends BaseScreen
 {
     Hero hero;
     Sword sword;
+    
+    Sound coinSound;
+    Sound swordSound;
+    Sound bushSound;
+    Sound flyerKillSound;
+    Sound rockHitSound;
+    Sound playerDeathSound;
 
     int health;
     int coins;
@@ -32,6 +43,13 @@ public class LevelScreen extends BaseScreen
     public void initialize() 
     {        
         TilemapActor tma = new TilemapActor("assets/map.tmx", mainStage);
+        
+        coinSound = Gdx.audio.newSound(Gdx.files.internal("assets/coin.wav"));
+        swordSound = Gdx.audio.newSound(Gdx.files.internal("assets/whoosh.wav"));
+        bushSound = Gdx.audio.newSound(Gdx.files.internal("assets/Bush.wav"));
+        rockHitSound = Gdx.audio.newSound(Gdx.files.internal("assets/RockHit.wav"));
+        flyerKillSound = Gdx.audio.newSound(Gdx.files.internal("assets/FlyerKill.wav"));
+        playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("assets/PlayerDeath.wav"));
 
         for (MapObject obj : tma.getRectangleList("Solid") )
         {
@@ -178,8 +196,16 @@ public class LevelScreen extends BaseScreen
         {
             for (BaseActor bush : BaseActor.getList(mainStage, "Bush"))
             {
-                if (sword.overlaps(bush))
+                if (sword.overlaps(bush)){
                     bush.remove();
+                    bushSound.play();
+                }
+            }
+            
+            for (BaseActor rock : BaseActor.getList(mainStage,"Rock"))
+            {
+                if (sword.overlaps(rock))
+                rockHitSound.play();
             }
 
             for (BaseActor flyer : BaseActor.getList(mainStage, "Flyer"))
@@ -187,6 +213,7 @@ public class LevelScreen extends BaseScreen
                 if (sword.overlaps(flyer))
                 {
                     flyer.remove();
+                    flyerKillSound.play();
                     Coin coin = new Coin(0,0, mainStage);
                     coin.centerAtActor(flyer);
                     Smoke smoke = new Smoke(0,0, mainStage);
@@ -201,6 +228,7 @@ public class LevelScreen extends BaseScreen
             {
                 coin.remove();
                 coins++;
+                coinSound.play(0.10f);
             }
         }
 
@@ -341,6 +369,7 @@ public class LevelScreen extends BaseScreen
         sword.setOriginX(0);
 
         sword.setVisible(true);
+        swordSound.play();
         sword.addAction( Actions.rotateBy(swordArc, 0.25f) );
         sword.addAction( Actions.after( Actions.visible(false) ) );
 
