@@ -25,6 +25,9 @@ public class LevelScreen extends BaseScreen
     Sound flyerKillSound;
     Sound rockHitSound;
     Sound playerDeathSound;
+    Sound arrowSound;
+    Sound buySound;
+    Sound damageSound;
 
     int health;
     int coins;
@@ -50,7 +53,10 @@ public class LevelScreen extends BaseScreen
         rockHitSound = Gdx.audio.newSound(Gdx.files.internal("assets/RockHit.wav"));
         flyerKillSound = Gdx.audio.newSound(Gdx.files.internal("assets/FlyerKill.wav"));
         playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("assets/PlayerDeath.wav"));
-
+        arrowSound = Gdx.audio.newSound(Gdx.files.internal("assets/arrow.wav"));
+        buySound = Gdx.audio.newSound(Gdx.files.internal("assets/buy.wav"));
+        damageSound = Gdx.audio.newSound(Gdx.files.internal("assets/damage.wav"));
+        
         for (MapObject obj : tma.getRectangleList("Solid") )
         {
             MapProperties props = obj.getProperties();
@@ -244,6 +250,7 @@ public class LevelScreen extends BaseScreen
                 Vector2 hitVector = heroPosition.sub( flyerPosition );
                 hero.setMotionAngle( hitVector.angle() );
                 hero.setSpeed(100);
+                damageSound.play();
                 health--;
             }
         }
@@ -320,6 +327,7 @@ public class LevelScreen extends BaseScreen
                 {
                     flyer.remove();
                     arrow.remove();
+                    flyerKillSound.play();
                     Coin coin = new Coin(0,0, mainStage);
                     coin.centerAtActor(flyer);
                     Smoke smoke = new Smoke(0,0, mainStage);
@@ -387,7 +395,7 @@ public class LevelScreen extends BaseScreen
             return;
 
         arrows--;
-
+        arrowSound.play();
         Arrow arrow = new Arrow(0,0, mainStage);
         arrow.centerAtActor(hero);
         arrow.setRotation( hero.getFacingAngle() );
@@ -411,12 +419,14 @@ public class LevelScreen extends BaseScreen
             if (hero.overlaps(shopHeart) && coins >= 3)
             {
                 coins -= 3;
+                buySound.play();
                 health += 1;
             }
 
             if (hero.overlaps(shopArrow) && coins >= 4)
             {
                 coins -= 4;
+                buySound.play();
                 arrows += 3;
             }
         }
