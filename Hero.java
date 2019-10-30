@@ -54,9 +54,9 @@ public class Hero extends BaseActor
         // set after animation established
         setBoundaryPolygon(8);
 
-        setAcceleration(400);
-        setMaxSpeed(100);
-        setDeceleration(400);
+        setAcceleration(800);
+        setMaxSpeed(200);
+        setDeceleration(800);
 
     }
 

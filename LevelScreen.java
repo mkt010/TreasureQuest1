@@ -168,13 +168,13 @@ public class LevelScreen extends BaseScreen
         if ( !sword.isVisible() )
         {
             // hero movement controls
-            if (Gdx.input.isKeyPressed(Keys.LEFT)) 
+            if (Gdx.input.isKeyPressed(Keys.A)) 
                 hero.accelerateAtAngle(180);
-            if (Gdx.input.isKeyPressed(Keys.RIGHT)) 
+            if (Gdx.input.isKeyPressed(Keys.D)) 
                 hero.accelerateAtAngle(0);
-            if (Gdx.input.isKeyPressed(Keys.UP)) 
+            if (Gdx.input.isKeyPressed(Keys.W)) 
                 hero.accelerateAtAngle(90);
-            if (Gdx.input.isKeyPressed(Keys.DOWN)) 
+            if (Gdx.input.isKeyPressed(Keys.S)) 
                 hero.accelerateAtAngle(270);
         }
 
@@ -204,8 +204,9 @@ public class LevelScreen extends BaseScreen
             
             for (BaseActor rock : BaseActor.getList(mainStage,"Rock"))
             {
-                if (sword.overlaps(rock))
-                rockHitSound.play();
+                if (sword.overlaps(rock)){
+                    rockHitSound.play();
+                }
             }
 
             for (BaseActor flyer : BaseActor.getList(mainStage, "Flyer"))
@@ -399,10 +400,10 @@ public class LevelScreen extends BaseScreen
         if ( gameOver )
             return false;
 
-        if (keycode == Keys.S)      
+        if (keycode == Keys.SPACE)      
             swingSword();
 
-        if (keycode == Keys.A)      
+        if (keycode == Keys.CONTROL_RIGHT )      
             shootArrow();
 
         if (keycode == Keys.B)
