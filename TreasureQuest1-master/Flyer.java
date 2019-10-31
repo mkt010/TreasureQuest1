@@ -6,7 +6,7 @@ public class Flyer extends BaseActor
     public Flyer(float x, float y, Stage s)
     {
         super(x,y,s);
-        loadAnimationFromSheet( "assets/slime.png", 1, 4, 0.05f, true);
+        loadAnimationFromSheet( "assets/enemy-flyer.png", 1, 4, 0.05f, true);
         setSize(48,48);
         setBoundaryPolygon(6);
         

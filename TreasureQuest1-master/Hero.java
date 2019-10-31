@@ -18,7 +18,7 @@ public class Hero extends BaseActor
     {
         super(x,y,s); 
 
-        String fileName = "assets/hero2.png";
+        String fileName = "assets/hero.png";
         int rows = 4;
         int cols = 4;
         Texture texture = new Texture(Gdx.files.internal(fileName), true);

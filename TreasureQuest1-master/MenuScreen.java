@@ -18,7 +18,7 @@ public class MenuScreen extends BaseScreen
         title.loadTexture( "assets/title.png" );
         title.centerAtPosition(400,475);
         
-        TextButton startButton = new TextButton("Start",BaseGame.textButtonStyle);
+        TextButton startButton = new TextButton("New Game",BaseGame.textButtonStyle);
 
         startButton.addListener(
             (Event e) ->
@@ -46,11 +46,12 @@ public class MenuScreen extends BaseScreen
             }
         );
         
-        uiTable.add(startButton).padRight(100).padTop(100);
-        uiTable.add(exitButton).padTop(100);
+        uiTable.add(startButton);
+        uiTable.row();
+        uiTable.add(exitButton);
     }
 
-    public boolean keyDown(int keyCode)
+    public boolean keyDowwn(int keyCode)
     {
         if (Gdx.input.isKeyPressed(Keys.ENTER))
             TreasureQuestGame.setActiveScreen(new LevelScreen());

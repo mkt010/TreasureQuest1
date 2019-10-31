@@ -306,7 +306,6 @@ public class LevelScreen extends BaseScreen
             messageLabel.setVisible(true);
             treasure.remove();
             gameOver = true; //change this when we have a next level
-            
         }
 
         if ( health <= 0 )
