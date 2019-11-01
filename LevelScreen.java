@@ -268,7 +268,7 @@ public class LevelScreen extends BaseScreen
                 if ( npc.getID().equals("Gatekeeper") )
                 {
                     int flyerCount = BaseActor.count(mainStage, "Flyer");
-                    String message = "Destroy the flyers and you can have the treasure. ";
+                    String message = "Destroy the slimes and you can have the treasure. ";
                     if ( flyerCount > 1 )
                         message += "There are " + flyerCount + " left.";
                     else if ( flyerCount == 1 )
