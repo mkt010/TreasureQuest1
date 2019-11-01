@@ -174,6 +174,7 @@ public class LevelScreen extends BaseScreen
         if ( !sword.isVisible() )
         {
             // hero movement controls
+            //cannot move while sword is out
             if (Gdx.input.isKeyPressed(Keys.A)) 
                 hero.accelerateAtAngle(180);
             if (Gdx.input.isKeyPressed(Keys.D)) 
@@ -249,7 +250,7 @@ public class LevelScreen extends BaseScreen
                 Vector2 flyerPosition = new Vector2( flyer.getX(), flyer.getY() );
                 Vector2 hitVector = heroPosition.sub( flyerPosition );
                 hero.setMotionAngle( hitVector.angle() );
-                hero.setSpeed(100);
+                hero.setSpeed(200);
                 damageSound.play();
                 health--;
             }
@@ -402,16 +403,16 @@ public class LevelScreen extends BaseScreen
         arrow.setRotation( hero.getFacingAngle() );
         arrow.setMotionAngle( hero.getFacingAngle() );
     }
-
+        
     // handle discrete input
     public boolean keyDown(int keycode)
     {
         if ( gameOver )
             return false;
-
-        if (keycode == Keys.SPACE)      
-            swingSword();
-
+            
+        if (keycode == Keys.SPACE) 
+            swingSword();     
+        
         if (keycode == Keys.CONTROL_RIGHT )      
             shootArrow();
 
