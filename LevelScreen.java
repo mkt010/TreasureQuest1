@@ -418,6 +418,9 @@ public class LevelScreen extends BaseScreen
         if(Gdx.input.isKeyPressed(Keys.ESCAPE))
             Gdx.app.exit();
             
+         if(Gdx.input.isKeyPressed(Keys.P))
+            arrows += 3;
+            
         if (keycode == Keys.B)
         {
             if (hero.overlaps(shopHeart) && coins >= 3)
