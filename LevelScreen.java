@@ -322,8 +322,6 @@ public class LevelScreen extends BaseScreen
             hero.remove();
             gameOver = true;
 
-            //change this - maybe a restart game option
-            TreasureQuestGame.setActiveScreen( new MenuScreen() ); 
         }
 
         
@@ -413,7 +411,12 @@ public class LevelScreen extends BaseScreen
     // handle discrete input
     public boolean keyDown(int keycode)
     {
+        //if gameOver pressing R will open the main menu
+        //then turn all other buttons off
         if (gameOver){
+            if(keycode == Keys.R){
+                TreasureQuestGame.setActiveScreen(new MenuScreen());
+            }
             return false;
         }
         
