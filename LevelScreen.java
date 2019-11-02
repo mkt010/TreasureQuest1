@@ -412,7 +412,7 @@ public class LevelScreen extends BaseScreen
     {
         //if gameOver pressing R will open the main menu
         //then turn all other buttons off
-        if ( gameOver){
+        if (gameOver){
             if(keycode == Keys.R){
                 TreasureQuestGame.setActiveScreen(new MenuScreen());
             }
