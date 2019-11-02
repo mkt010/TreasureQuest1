@@ -306,8 +306,10 @@ public class LevelScreen extends BaseScreen
             messageLabel.setFontScale(2);
             messageLabel.setVisible(true);
             treasure.remove();
-            gameOver = true; //change this when we have a next level
-            
+            gameOver = true; 
+            //change this when we have a next level
+            //gameOver would need to be false
+            //gameLevel++
         }
 
         if ( health <= 0 )
@@ -318,9 +320,10 @@ public class LevelScreen extends BaseScreen
             messageLabel.setVisible(true);
             hero.remove();
             gameOver = true;
-            //change this - maybe a restart game option
-        }
+            
 
+        }
+        
         for (BaseActor arrow : BaseActor.getList(mainStage, "Arrow"))
         {
             for (BaseActor flyer : BaseActor.getList(mainStage, "Flyer"))
@@ -407,21 +410,24 @@ public class LevelScreen extends BaseScreen
     // handle discrete input
     public boolean keyDown(int keycode)
     {
-        if ( gameOver )
+        //if gameOver pressing R will open the main menu
+        //then turn all other buttons off
+        if ( gameOver){
+            if(keycode == Keys.R){
+                TreasureQuestGame.setActiveScreen(new MenuScreen());
+            }
             return false;
-            
+        }
+        
         if (keycode == Keys.SPACE) 
             swingSword();     
         
         if (keycode == Keys.CONTROL_RIGHT )      
             shootArrow();
-
-        if(Gdx.input.isKeyPressed(Keys.ESCAPE))
-            Gdx.app.exit();
-            
-         if(Gdx.input.isKeyPressed(Keys.P))
-            arrows += 3;
-            
+           
+        if(Gdx.input.isKeyPressed(Keys.P))
+           arrows += 3;
+        
         if (keycode == Keys.B)
         {
             if (hero.overlaps(shopHeart) && coins >= 3)
