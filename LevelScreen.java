@@ -162,6 +162,7 @@ public class LevelScreen extends BaseScreen
         hero.toFront();
     }
 
+    
     public void update(float dt)
     {
         if ( gameOver )
@@ -320,7 +321,6 @@ public class LevelScreen extends BaseScreen
             messageLabel.setVisible(true);
             hero.remove();
             gameOver = true;
-            
 
         }
         
