@@ -322,8 +322,10 @@ public class LevelScreen extends BaseScreen
             hero.remove();
             gameOver = true;
 
-
+            //change this - maybe a restart game option
+            TreasureQuestGame.setActiveScreen( new MenuScreen() ); 
         }
+
         
         for (BaseActor arrow : BaseActor.getList(mainStage, "Arrow"))
         {
