@@ -321,7 +321,6 @@ public class LevelScreen extends BaseScreen
             messageLabel.setVisible(true);
             hero.remove();
             gameOver = true;
-
         }
         
         for (BaseActor arrow : BaseActor.getList(mainStage, "Arrow"))
