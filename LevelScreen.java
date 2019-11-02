@@ -322,6 +322,7 @@ public class LevelScreen extends BaseScreen
             hero.remove();
             gameOver = true;
 
+
         }
         
         for (BaseActor arrow : BaseActor.getList(mainStage, "Arrow"))
