@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="360" height="360" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="202">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="360" height="360" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="205">
  <tileset firstgid="1" name="adventure-tiles" tilewidth="32" tileheight="32" tilecount="40" columns="10">
   <image source="adventure-tiles.png" width="320" height="128"/>
  </tileset>
@@ -629,5 +629,8 @@
   <object id="199" gid="2" x="5576" y="4816" width="32" height="32"/>
   <object id="200" gid="2" x="5957" y="4834" width="633" height="540"/>
   <object id="201" gid="2" x="0" y="5121" width="11518" height="5120"/>
+  <object id="202" gid="43" x="5658" y="6116" width="32" height="32"/>
+  <object id="203" gid="43" x="5776" y="6121" width="32" height="32"/>
+  <object id="204" gid="43" x="5841" y="6151" width="32" height="32"/>
  </objectgroup>
 </map>

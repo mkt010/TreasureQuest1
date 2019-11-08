@@ -130,7 +130,7 @@
    <properties>
     <property name="id" value="Shopkeeper"/>
     <property name="text">1 Heart for 3 Coins! 
- 3 Arrows for 4 Coins!</property>
+ 3 Angels for 4 Coins!</property>
    </properties>
   </object>
   <object id="30" gid="44" x="464.667" y="785.333" width="32" height="32"/>

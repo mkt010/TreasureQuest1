@@ -28,10 +28,15 @@ public class LevelScreen extends BaseScreen
     Sound arrowSound;
     Sound buySound;
     Sound damageSound;
+    Sound gameOverSound;
+    
+    private float audioVolume;
+    private Music instrumental;
 
     int health;
     int coins;
     int arrows;
+
     boolean gameOver;
     Label healthLabel;
     Label coinLabel;
@@ -45,8 +50,8 @@ public class LevelScreen extends BaseScreen
 
     public void initialize() 
     {        
-        TilemapActor tma = new TilemapActor("assets/map.tmx", mainStage);
-        
+        TilemapActor tma = new TilemapActor( "assets/map.tmx", mainStage);
+
         coinSound = Gdx.audio.newSound(Gdx.files.internal("assets/coin.wav"));
         swordSound = Gdx.audio.newSound(Gdx.files.internal("assets/whoosh.wav"));
         bushSound = Gdx.audio.newSound(Gdx.files.internal("assets/Bush.wav"));
@@ -56,6 +61,7 @@ public class LevelScreen extends BaseScreen
         arrowSound = Gdx.audio.newSound(Gdx.files.internal("assets/arrow.wav"));
         buySound = Gdx.audio.newSound(Gdx.files.internal("assets/buy.wav"));
         damageSound = Gdx.audio.newSound(Gdx.files.internal("assets/damage.wav"));
+        gameOverSound = Gdx.audio.newSound(Gdx.files.internal("assets/GameOver.wav"));
         
         for (MapObject obj : tma.getRectangleList("Solid") )
         {
@@ -160,14 +166,21 @@ public class LevelScreen extends BaseScreen
         shopArrow = new ShopArrow( (float)shopArrowProps.get("x"), (float)shopArrowProps.get("y"), mainStage );
 
         hero.toFront();
-    }
 
+        instrumental = Gdx.audio.newMusic(Gdx.files.internal("assets/gameMusic.mp3"));
+        
+        audioVolume = 1.00f;
+        instrumental.setLooping(true);
+        instrumental.setVolume(audioVolume);
+        instrumental.play();
+    }
     
     public void update(float dt)
     {
-        if ( gameOver )
+        if ( gameOver ){
+            instrumental.dispose();
             return;
-
+        }
         healthLabel.setText(" x " + health);
         coinLabel.setText(" x " + coins);
         arrowLabel.setText(" x " + arrows);
@@ -319,6 +332,7 @@ public class LevelScreen extends BaseScreen
             messageLabel.setColor(Color.RED);
             messageLabel.setFontScale(2);
             messageLabel.setVisible(true);
+            gameOverSound.play();
             hero.remove();
             gameOver = true;
 
@@ -407,28 +421,28 @@ public class LevelScreen extends BaseScreen
         arrow.setRotation( hero.getFacingAngle() );
         arrow.setMotionAngle( hero.getFacingAngle() );
     }
-        
+
     // handle discrete input
     public boolean keyDown(int keycode)
     {
-        //if gameOver pressing R will open the main menu
+        //if gameOver pressing R or Escape will open the main menu
         //then turn all other buttons off
         if (gameOver){
-            if(keycode == Keys.R){
+            if(keycode == Keys.R || keycode == Keys.ESCAPE){
                 TreasureQuestGame.setActiveScreen(new MenuScreen());
             }
             return false;
         }
-        
-        if (keycode == Keys.SPACE) 
+            
+        if (keycode == Keys.SPACE ) 
             swingSword();     
-        
+            
         if (keycode == Keys.CONTROL_RIGHT )      
             shootArrow();
-           
+            
         if(Gdx.input.isKeyPressed(Keys.P))
            arrows += 3;
-        
+            
         if (keycode == Keys.B)
         {
             if (hero.overlaps(shopHeart) && coins >= 3)
