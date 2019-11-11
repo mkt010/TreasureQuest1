@@ -155,6 +155,12 @@ public class LevelScreen2 extends BaseScreen
             new Flyer( (float)props.get("x"), (float)props.get("y"), mainStage );
         }
 
+        for (MapObject obj : tma.getTileList("SmallFlyer"))
+        {
+            MapProperties props = obj.getProperties();
+            new Flyer( (float)props.get("x"), (float)props.get("y"), mainStage );
+        }
+        
         for (MapObject obj : tma.getTileList("NPC") )
         {
             MapProperties props = obj.getProperties();
@@ -223,6 +229,15 @@ public class LevelScreen2 extends BaseScreen
                     flyer.setMotionAngle( flyer.getMotionAngle() + 180 );
                 }
             }
+            
+            for (BaseActor smallFlyer : BaseActor.getList(mainStage, "SmallFlyer"))
+            {
+                if (smallFlyer.overlaps(solid))
+                {
+                    smallFlyer.preventOverlap(solid);
+                    smallFlyer.setMotionAngle( smallFlyer.getMotionAngle() + 180 );
+                }
+            }
         }
 
         if ( sword.isVisible() )
@@ -248,12 +263,28 @@ public class LevelScreen2 extends BaseScreen
                 {
                     flyer.remove();
                     flyerKillSound.play();
-                    Coin coin = new Coin(0,0, mainStage);
-                    coin.centerAtActor(flyer);
-                    Smoke smoke = new Smoke(0,0, mainStage);
-                    smoke.centerAtActor(flyer);
+                    SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
+                    smallFlyer.centerAtActor(flyer);
+                    //Coin coin = new Coin(0,0, mainStage);
+                    //coin.centerAtActor(flyer);
+                    //Smoke smoke = new Smoke(0,0, mainStage);
+                    //smoke.centerAtActor(flyer);
                 }
             }
+            
+            for(BaseActor smallFlyer : BaseActor.getList(mainStage, "SmallFlyer"))
+            {
+                if (sword.overlaps(smallFlyer))
+                {
+                    smallFlyer.remove();
+                    flyerKillSound.play();
+                    Coin coin = new Coin(0,0, mainStage);
+                    coin.centerAtActor(smallFlyer);
+                    Smoke smoke = new Smoke(0,0, mainStage);
+                    smoke.centerAtActor(smallFlyer);
+                }
+            }
+            
         }
 
         for ( BaseActor coin : BaseActor.getList(mainStage, "Coin") )
@@ -282,6 +313,22 @@ public class LevelScreen2 extends BaseScreen
             }
         }
 
+        for (BaseActor smallFlyer : BaseActor.getList(mainStage, "SmallFlyer"))
+        {
+            if ( hero.overlaps(smallFlyer) )
+            {
+                hero.preventOverlap(smallFlyer);                
+                smallFlyer.setMotionAngle( smallFlyer.getMotionAngle() + 180 );
+                Vector2 heroPosition  = new Vector2(  hero.getX(),  hero.getY() );
+                Vector2 smallFlyerPosition = new Vector2( smallFlyer.getX(), smallFlyer.getY() );
+                Vector2 hitVector = heroPosition.sub( smallFlyerPosition );
+                hero.setMotionAngle( hitVector.angle() );
+                hero.setSpeed(200);
+                damageSound.play();
+                health--;
+            }
+        }
+        
         for ( BaseActor npcActor : BaseActor.getList(mainStage, "NPC") )
         {
             NPC npc = (NPC)npcActor;
@@ -295,12 +342,14 @@ public class LevelScreen2 extends BaseScreen
                 if ( npc.getID().equals("Gatekeeper") )
                 {
                     int flyerCount = BaseActor.count(mainStage, "Flyer");
+                    int smallFlyerCount = BaseActor.count(mainStage, "SmallFlyer");
+                    int totalCount = (flyerCount + smallFlyerCount);
                     String message = "Destroy the slimes and you can have the treasure. ";
-                    if ( flyerCount > 1 )
-                        message += "There are " + flyerCount + " left.";
-                    else if ( flyerCount == 1 )
-                        message += "There is " + flyerCount + " left.";
-                    else // flyerCount == 0
+                    if ( totalCount > 1 )
+                        message += "There are " + totalCount + " left.";
+                    else if ( totalCount == 1 )
+                        message += "There is " + totalCount + " left.";
+                    else // totalCount == 0
                     {
                         message += "It is yours!";
                         npc.addAction( Actions.fadeOut(2.0f) );
@@ -362,12 +411,29 @@ public class LevelScreen2 extends BaseScreen
                     flyer.remove();
                     arrow.remove();
                     flyerKillSound.play();
-                    Coin coin = new Coin(0,0, mainStage);
-                    coin.centerAtActor(flyer);
-                    Smoke smoke = new Smoke(0,0, mainStage);
-                    smoke.centerAtActor(flyer);
+                    SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
+                    smallFlyer.centerAtActor(flyer);
+                    
+                    //Coin coin = new Coin(0,0, mainStage);
+                    //coin.centerAtActor(flyer);
+                    //Smoke smoke = new Smoke(0,0, mainStage);
+                    //smoke.centerAtActor(flyer);
                 }
 
+            for(BaseActor smallFlyer : BaseActor.getList(mainStage, "SmallFlyer"))
+            {
+                if (arrow.overlaps(smallFlyer))
+                {
+                    smallFlyer.remove();
+                    arrow.remove();
+                    flyerKillSound.play();
+                    Coin coin = new Coin(0,0, mainStage);
+                    coin.centerAtActor(smallFlyer);
+                    Smoke smoke = new Smoke(0,0, mainStage);
+                    smoke.centerAtActor(smallFlyer);
+                }
+            }
+            
             }
 
             for (BaseActor solid : BaseActor.getList(mainStage, "Solid"))

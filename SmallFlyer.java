@@ -1,14 +1,14 @@
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.math.MathUtils;
 
-public class Flyer extends BaseActor
+public class SmallFlyer extends BaseActor
 {
-    public Flyer(float x, float y, Stage s)
+    public SmallFlyer(float x, float y, Stage s)
     {
         super(x,y,s);
         loadAnimationFromSheet( "assets/slime.png", 1, 4, 0.05f, true);
-        setSize(48,48);
-        setBoundaryPolygon(6);
+        setSize(24,24);
+        setBoundaryPolygon(3);
         
         
         setSpeed( MathUtils.random(50,80) );

@@ -72,10 +72,14 @@ public class MenuScreen extends BaseScreen
 
     public boolean keyDown(int keyCode)
     {
-        if (Gdx.input.isKeyPressed(Keys.ENTER))
+        if (Gdx.input.isKeyPressed(Keys.ENTER)){
             TreasureQuestGame.setActiveScreen(new LevelScreen());
-        if(Gdx.input.isKeyPressed(Keys.ESCAPE))
+            instrumental.dispose();
+        }
+        if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
             Gdx.app.exit();
+            instrumental.dispose();
+        }
         return false;
     }
     
