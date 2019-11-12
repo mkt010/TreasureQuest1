@@ -14,7 +14,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.MathUtils;
 
-public class LevelScreen3 extends BaseScreen
+public class LevelScreen4 extends BaseScreen
 {
     Hero hero;
     Sword sword;
@@ -55,7 +55,7 @@ public class LevelScreen3 extends BaseScreen
     public void initialize() 
     {        
         
-        tma = new TilemapActor("assets/map2.tmx", mainStage);
+        tma = new TilemapActor("assets/map3.tmx", mainStage);
 
         coinSound = Gdx.audio.newSound(Gdx.files.internal("assets/coin.wav"));
         swordSound = Gdx.audio.newSound(Gdx.files.internal("assets/whoosh.wav"));
@@ -179,7 +179,7 @@ public class LevelScreen3 extends BaseScreen
 
         hero.toFront();
 
-        instrumental = Gdx.audio.newMusic(Gdx.files.internal("assets/bgm_menu.mp3"));
+        instrumental = Gdx.audio.newMusic(Gdx.files.internal("assets/bgm_action_5.mp3"));
         
         audioVolume = 1.00f;
         instrumental.setLooping(true);

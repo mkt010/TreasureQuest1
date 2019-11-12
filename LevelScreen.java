@@ -173,7 +173,7 @@ public class LevelScreen extends BaseScreen
 
         hero.toFront();
 
-        instrumental = Gdx.audio.newMusic(Gdx.files.internal("assets/gameMusic.mp3"));
+        instrumental = Gdx.audio.newMusic(Gdx.files.internal("assets/bgm_action_2.mp3"));
         
         audioVolume = 1.00f;
         instrumental.setLooping(true);
