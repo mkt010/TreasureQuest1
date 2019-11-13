@@ -8,7 +8,7 @@ public class SmallFlyer extends BaseActor
         super(x,y,s);
         loadAnimationFromSheet( "assets/slime.png", 1, 4, 0.05f, true);
         setSize(24,24);
-        setBoundaryPolygon(3);
+        setBoundaryPolygon(6);
         
         
         setSpeed( MathUtils.random(50,80) );

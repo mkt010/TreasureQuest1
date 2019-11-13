@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent.Type;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.audio.Music;
 
-public class MenuScreen extends BaseScreen
+public class LevelMenu extends BaseScreen
 {
     Sound buttonClickSound;
     
@@ -28,16 +28,16 @@ public class MenuScreen extends BaseScreen
         instrumental.play();
         
         BaseActor background = new BaseActor(0,0, mainStage);
-        background.loadTexture( "assets/menu.png" );
+        background.loadTexture( "assets/LevelMenu.png" );
         background.setSize(800,600);
         
         BaseActor title = new BaseActor(0,0, mainStage);
         title.loadTexture( "assets/title.png" );
         title.centerAtPosition(400,475);
         
-        TextButton startButton = new TextButton("Start",BaseGame.textButtonStyle);
+        TextButton level1Button = new TextButton("Level 1",BaseGame.textButtonStyle);
 
-        startButton.addListener(
+        level1Button.addListener(
             (Event e) ->
             {
                 if(!(e instanceof InputEvent) ||
@@ -51,9 +51,9 @@ public class MenuScreen extends BaseScreen
                 }
         );
         
-        TextButton levelSelectButton = new TextButton("Levels",BaseGame.textButtonStyle);
+        TextButton level2Button = new TextButton("Level 2",BaseGame.textButtonStyle);
 
-        levelSelectButton.addListener(
+        level2Button.addListener(
             (Event e) ->
             {
                 if(!(e instanceof InputEvent) ||
@@ -61,7 +61,39 @@ public class MenuScreen extends BaseScreen
                     return false;
                     
                     buttonClickSound.play();
-                    TreasureQuestGame.setActiveScreen(new LevelMenu());
+                    TreasureQuestGame.setActiveScreen(new LevelScreen2());
+                    instrumental.dispose();
+                    return false;
+                }
+        );
+        
+                TextButton level3Button = new TextButton("Level 3",BaseGame.textButtonStyle);
+
+        level3Button.addListener(
+            (Event e) ->
+            {
+                if(!(e instanceof InputEvent) ||
+                   !((InputEvent)e).getType().equals(Type.touchDown))
+                    return false;
+                    
+                    buttonClickSound.play();
+                    TreasureQuestGame.setActiveScreen(new LevelScreen3());
+                    instrumental.dispose();
+                    return false;
+                }
+        );
+        
+        TextButton level4Button = new TextButton("Level 4",BaseGame.textButtonStyle);
+
+        level4Button.addListener(
+            (Event e) ->
+            {
+                if(!(e instanceof InputEvent) ||
+                   !((InputEvent)e).getType().equals(Type.touchDown))
+                    return false;
+                    
+                    buttonClickSound.play();
+                    TreasureQuestGame.setActiveScreen(new LevelScreen4());
                     instrumental.dispose();
                     return false;
                 }
@@ -82,24 +114,26 @@ public class MenuScreen extends BaseScreen
             }
         );
          
-        float w = levelSelectButton.getWidth();
+        float w = level4Button.getWidth();
          
-        uiTable.add(startButton).width(w).left().padBottom(15);
+        uiTable.add(level1Button).left().width(w).padBottom(10);
+        uiTable.add(level3Button).right().width(w).padBottom(10);
         uiTable.row().expandX();
-        uiTable.add(levelSelectButton).left().padBottom(15);
+        
+        uiTable.add(level2Button).left().width(w).padBottom(10);
+        uiTable.add(level4Button).right().padBottom(10);
         uiTable.row().expandX();
-        uiTable.add(exitButton).width(w).left();
+
+        uiTable.add(exitButton).colspan(8).center().width(w);
         
         uiTable.padTop(100);
-        uiTable.padLeft(35);
+        uiTable.padLeft(80);
+        uiTable.padRight(80);
     }
 
     public boolean keyDown(int keyCode)
     {
-        if (Gdx.input.isKeyPressed(Keys.ENTER)){
-            TreasureQuestGame.setActiveScreen(new LevelScreen());
-            instrumental.dispose();
-        }
+
         if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
             Gdx.app.exit();
             instrumental.dispose();

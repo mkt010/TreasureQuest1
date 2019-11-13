@@ -513,7 +513,7 @@ public class LevelScreen2 extends BaseScreen
         }
         
         if ( gameWin){
-            TreasureQuestGame.setActiveScreen(new WinMenu2());
+            TreasureQuestGame.setActiveScreen(new LevelMenu());
             return false;
         }
         
