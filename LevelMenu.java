@@ -28,12 +28,8 @@ public class LevelMenu extends BaseScreen
         instrumental.play();
         
         BaseActor background = new BaseActor(0,0, mainStage);
-        background.loadTexture( "assets/LevelMenu.png" );
+        background.loadTexture( "assets/MainMenu1.png" );
         background.setSize(800,600);
-        
-        BaseActor title = new BaseActor(0,0, mainStage);
-        title.loadTexture( "assets/title.png" );
-        title.centerAtPosition(400,475);
         
         TextButton level1Button = new TextButton("Level 1",BaseGame.textButtonStyle);
 
@@ -116,19 +112,16 @@ public class LevelMenu extends BaseScreen
          
         float w = level4Button.getWidth();
          
-        uiTable.add(level1Button).left().width(w).padBottom(10);
-        uiTable.add(level3Button).right().width(w).padBottom(10);
-        uiTable.row().expandX();
+        uiTable.add(level1Button).width(w).padLeft(25);
+        uiTable.add(level2Button).width(w);
         
-        uiTable.add(level2Button).left().width(w).padBottom(10);
-        uiTable.add(level4Button).right().padBottom(10);
+        uiTable.add(level3Button).width(w);
+        uiTable.add(level4Button);
         uiTable.row().expandX();
 
-        uiTable.add(exitButton).colspan(8).center().width(w);
+        uiTable.add(exitButton).colspan(8).center().width(w).padTop(10);
         
-        uiTable.padTop(100);
-        uiTable.padLeft(80);
-        uiTable.padRight(80);
+        uiTable.padTop(300);
     }
 
     public boolean keyDown(int keyCode)

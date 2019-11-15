@@ -65,7 +65,7 @@ public abstract class BaseGame extends Game
         textButtonStyle = new TextButtonStyle();
 
         Texture   buttonTex   = new Texture( Gdx.files.internal("assets/buttonTransp.png") );
-        NinePatch buttonPatch = new NinePatch(buttonTex, 24,24,24,24);
+        NinePatch buttonPatch = new NinePatch(buttonTex, 15,15,15,15);
         textButtonStyle.up    = new NinePatchDrawable( buttonPatch );
         textButtonStyle.font      = customFont;
         textButtonStyle.fontColor = Color.WHITE;

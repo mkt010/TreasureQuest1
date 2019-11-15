@@ -28,12 +28,12 @@ public class MenuScreen extends BaseScreen
         instrumental.play();
         
         BaseActor background = new BaseActor(0,0, mainStage);
-        background.loadTexture( "assets/menu.png" );
+        background.loadTexture( "assets/MainMenu1.png" );
         background.setSize(800,600);
         
-        BaseActor title = new BaseActor(0,0, mainStage);
-        title.loadTexture( "assets/title.png" );
-        title.centerAtPosition(400,475);
+        //BaseActor title = new BaseActor(0,0, mainStage);
+        //title.loadTexture( "assets/title.png" );
+        //title.centerAtPosition(400,475);
         
         TextButton startButton = new TextButton("Start",BaseGame.textButtonStyle);
 
@@ -84,14 +84,11 @@ public class MenuScreen extends BaseScreen
          
         float w = levelSelectButton.getWidth();
          
-        uiTable.add(startButton).width(w).left().padBottom(15);
-        uiTable.row().expandX();
-        uiTable.add(levelSelectButton).left().padBottom(15);
-        uiTable.row().expandX();
-        uiTable.add(exitButton).width(w).left();
+        uiTable.add(startButton).width(w).padRight(10);
+        uiTable.add(levelSelectButton).padRight(10);
+        uiTable.add(exitButton).width(w);
         
-        uiTable.padTop(100);
-        uiTable.padLeft(35);
+        uiTable.padTop(300);
     }
 
     public boolean keyDown(int keyCode)
