@@ -416,11 +416,6 @@ public class LevelScreen2 extends BaseScreen
                     smallFlyer.centerAtActor(flyer);
                     smallFlyer = new SmallFlyer(0,0,mainStage);
                     smallFlyer.centerAtActor(flyer);
-                    
-                    //Coin coin = new Coin(0,0, mainStage);
-                    //coin.centerAtActor(flyer);
-                    //Smoke smoke = new Smoke(0,0, mainStage);
-                    //smoke.centerAtActor(flyer);
                 }
 
             for(BaseActor smallFlyer : BaseActor.getList(mainStage, "SmallFlyer"))

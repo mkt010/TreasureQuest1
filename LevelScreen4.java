@@ -56,7 +56,7 @@ public class LevelScreen4 extends BaseScreen
     public void initialize() 
     {        
         
-        tma = new TilemapActor("assets/map3.tmx", mainStage);
+        tma = new TilemapActor("assets/map3a.tmx", mainStage);
 
         coinSound = Gdx.audio.newSound(Gdx.files.internal("assets/coin.wav"));
         swordSound = Gdx.audio.newSound(Gdx.files.internal("assets/whoosh.wav"));
@@ -163,6 +163,18 @@ public class LevelScreen4 extends BaseScreen
             new Flyer( (float)props.get("x"), (float)props.get("y"), mainStage );
         }
         
+        for (MapObject obj : tma.getTileList("GiantFlyer"))
+        {
+            MapProperties props = obj.getProperties();
+            new GiantFlyer( (float)props.get("x"), (float)props.get("y"), mainStage );
+        }
+        
+        for (MapObject obj : tma.getTileList("LargeFlyer"))
+        {
+            MapProperties props = obj.getProperties();
+            new LargeFlyer( (float)props.get("x"), (float)props.get("y"), mainStage );
+        }
+        
         for (MapObject obj : tma.getTileList("NPC") )
         {
             MapProperties props = obj.getProperties();
@@ -240,6 +252,24 @@ public class LevelScreen4 extends BaseScreen
                     smallFlyer.setMotionAngle( smallFlyer.getMotionAngle() + 180 );
                 }
             }
+            
+            for (BaseActor giantFlyer : BaseActor.getList(mainStage, "GiantFlyer"))
+            {
+                if (giantFlyer.overlaps(solid))
+                {
+                    giantFlyer.preventOverlap(solid);
+                    giantFlyer.setMotionAngle( giantFlyer.getMotionAngle() + 180 );
+                }
+            }
+            
+            for (BaseActor largeFlyer : BaseActor.getList(mainStage, "LargeFlyer"))
+            {
+                if (largeFlyer.overlaps(solid))
+                {
+                    largeFlyer.preventOverlap(solid);
+                    largeFlyer.setMotionAngle( largeFlyer.getMotionAngle() + 180 );
+                }
+            }
         }
 
         if ( sword.isVisible() )
@@ -259,6 +289,32 @@ public class LevelScreen4 extends BaseScreen
                 }
             }
 
+            for (BaseActor giantFlyer : BaseActor.getList(mainStage, "GiantFlyer"))
+            {
+                if (sword.overlaps(giantFlyer))
+                {
+                    giantFlyer.remove();
+                    flyerKillSound.play();
+                    LargeFlyer largeFlyer = new LargeFlyer(0,0,mainStage);
+                    largeFlyer.centerAtActor(giantFlyer);
+                    largeFlyer = new LargeFlyer(0,0,mainStage);
+                    largeFlyer.centerAtActor(giantFlyer);
+                }
+            }
+            
+            for (BaseActor largeFlyer : BaseActor.getList(mainStage, "LargeFlyer"))
+            {
+                if (sword.overlaps(largeFlyer))
+                {
+                    largeFlyer.remove();
+                    flyerKillSound.play();
+                    Flyer flyer = new Flyer(0,0,mainStage);
+                    flyer.centerAtActor(largeFlyer);
+                    flyer = new Flyer(0,0,mainStage);
+                    flyer.centerAtActor(largeFlyer);
+                }
+            }
+            
             for (BaseActor flyer : BaseActor.getList(mainStage, "Flyer"))
             {
                 if (sword.overlaps(flyer))
@@ -329,6 +385,38 @@ public class LevelScreen4 extends BaseScreen
             }
         }
         
+        for (BaseActor giantFlyer : BaseActor.getList(mainStage, "GiantFlyer"))
+        {
+            if ( hero.overlaps(giantFlyer) )
+            {
+                hero.preventOverlap(giantFlyer);                
+                giantFlyer.setMotionAngle( giantFlyer.getMotionAngle() + 180 );
+                Vector2 heroPosition  = new Vector2(  hero.getX(),  hero.getY() );
+                Vector2 giantFlyerPosition = new Vector2( giantFlyer.getX(), giantFlyer.getY() );
+                Vector2 hitVector = heroPosition.sub( giantFlyerPosition );
+                hero.setMotionAngle( hitVector.angle() );
+                hero.setSpeed(200);
+                damageSound.play();
+                health--;
+            }
+        }
+        
+        for (BaseActor largeFlyer : BaseActor.getList(mainStage, "LargeFlyer"))
+        {
+            if ( hero.overlaps(largeFlyer) )
+            {
+                hero.preventOverlap(largeFlyer);                
+                largeFlyer.setMotionAngle( largeFlyer.getMotionAngle() + 180 );
+                Vector2 heroPosition  = new Vector2(  hero.getX(),  hero.getY() );
+                Vector2 largeFlyerPosition = new Vector2( largeFlyer.getX(), largeFlyer.getY() );
+                Vector2 hitVector = heroPosition.sub( largeFlyerPosition );
+                hero.setMotionAngle( hitVector.angle() );
+                hero.setSpeed(200);
+                damageSound.play();
+                health--;
+            }
+        }
+        
         for ( BaseActor npcActor : BaseActor.getList(mainStage, "NPC") )
         {
             NPC npc = (NPC)npcActor;
@@ -343,7 +431,9 @@ public class LevelScreen4 extends BaseScreen
                 {
                     int flyerCount = BaseActor.count(mainStage, "Flyer");
                     int smallFlyerCount = BaseActor.count(mainStage, "SmallFlyer");
-                    int totalCount = (flyerCount + smallFlyerCount);
+                    int giantFlyerCount = BaseActor.count(mainStage, "GiantFlyer");
+                    int largeFlyerCount = BaseActor.count(mainStage, "LargeFlyer");
+                    int totalCount = (flyerCount + smallFlyerCount + giantFlyerCount + largeFlyerCount);
                     String message = "Destroy the slimes and you can have the treasure. ";
                     if ( totalCount > 1 )
                         message += "There are " + totalCount + " left.";
@@ -404,7 +494,35 @@ public class LevelScreen4 extends BaseScreen
         
         for (BaseActor arrow : BaseActor.getList(mainStage, "Arrow"))
         {
-            for (BaseActor flyer : BaseActor.getList(mainStage, "Flyer"))
+            for (BaseActor giantFlyer : BaseActor.getList(mainStage, "GiantFlyer"))
+            {
+                if (arrow.overlaps(giantFlyer))
+                {
+                    arrow.remove();
+                    giantFlyer.remove();
+                    flyerKillSound.play();
+                    LargeFlyer largeFlyer = new LargeFlyer(0,0,mainStage);
+                    largeFlyer.centerAtActor(giantFlyer);
+                    largeFlyer = new LargeFlyer(0,0,mainStage);
+                    largeFlyer.centerAtActor(giantFlyer);
+                }
+            }
+            
+            for (BaseActor largeFlyer : BaseActor.getList(mainStage, "LargeFlyer"))
+            {
+                if (arrow.overlaps(largeFlyer))
+                {
+                    arrow.remove();
+                    largeFlyer.remove();
+                    flyerKillSound.play();
+                    Flyer flyer = new Flyer(0,0,mainStage);
+                    flyer.centerAtActor(largeFlyer);
+                    flyer = new Flyer(0,0,mainStage);
+                    flyer.centerAtActor(largeFlyer);
+                }
+            }
+            
+            for(BaseActor flyer : BaseActor.getList(mainStage, "Flyer"))
             {
                 if (arrow.overlaps(flyer))
                 {
@@ -415,8 +533,9 @@ public class LevelScreen4 extends BaseScreen
                     smallFlyer.centerAtActor(flyer);
                     smallFlyer = new SmallFlyer(0,0,mainStage);
                     smallFlyer.centerAtActor(flyer);
-                }
-
+                }   
+            }
+                
             for(BaseActor smallFlyer : BaseActor.getList(mainStage, "SmallFlyer"))
             {
                 if (arrow.overlaps(smallFlyer))
@@ -429,8 +548,6 @@ public class LevelScreen4 extends BaseScreen
                     Smoke smoke = new Smoke(0,0, mainStage);
                     smoke.centerAtActor(smallFlyer);
                 }
-            }
-            
             }
 
             for (BaseActor solid : BaseActor.getList(mainStage, "Solid"))
