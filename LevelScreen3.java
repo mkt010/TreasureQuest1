@@ -29,6 +29,7 @@ public class LevelScreen3 extends BaseScreen
     Sound buySound;
     Sound damageSound;
     Sound gameOverSound;
+    Sound errorSound;
     
     private float audioVolume;
     private Music instrumental;
@@ -67,6 +68,7 @@ public class LevelScreen3 extends BaseScreen
         buySound = Gdx.audio.newSound(Gdx.files.internal("assets/buy.wav"));
         damageSound = Gdx.audio.newSound(Gdx.files.internal("assets/damage.wav"));
         gameOverSound = Gdx.audio.newSound(Gdx.files.internal("assets/GameOver.wav"));
+        errorSound = Gdx.audio.newSound(Gdx.files.internal("assets/Error.wav"));
         
         for (MapObject obj : tma.getRectangleList("Solid") )
         {
@@ -265,10 +267,8 @@ public class LevelScreen3 extends BaseScreen
                     flyerKillSound.play();
                     SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
                     smallFlyer.centerAtActor(flyer);
-                    //Coin coin = new Coin(0,0, mainStage);
-                    //coin.centerAtActor(flyer);
-                    //Smoke smoke = new Smoke(0,0, mainStage);
-                    //smoke.centerAtActor(flyer);
+                    smallFlyer = new SmallFlyer(0,0,mainStage);
+                    smallFlyer.centerAtActor(flyer);
                 }
             }
             
@@ -413,11 +413,8 @@ public class LevelScreen3 extends BaseScreen
                     flyerKillSound.play();
                     SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
                     smallFlyer.centerAtActor(flyer);
-                    
-                    //Coin coin = new Coin(0,0, mainStage);
-                    //coin.centerAtActor(flyer);
-                    //Smoke smoke = new Smoke(0,0, mainStage);
-                    //smoke.centerAtActor(flyer);
+                    smallFlyer = new SmallFlyer(0,0,mainStage);
+                    smallFlyer.centerAtActor(flyer);
                 }
 
             for(BaseActor smallFlyer : BaseActor.getList(mainStage, "SmallFlyer"))
@@ -531,12 +528,22 @@ public class LevelScreen3 extends BaseScreen
                 buySound.play();
                 health += 1;
             }
+            
+            if (hero.overlaps(shopHeart) && coins < 3)
+            {
+                errorSound.play();
+            }
 
             if (hero.overlaps(shopArrow) && coins >= 4)
             {
                 coins -= 4;
                 buySound.play();
                 arrows += 3;
+            }
+            
+            if (hero.overlaps(shopArrow) && coins < 4)
+            {
+                errorSound.play();
             }
         }
         
