@@ -265,10 +265,10 @@ public class LevelScreen3 extends BaseScreen
                 {
                     flyer.remove();
                     flyerKillSound.play();
-                    SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-                    smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
+                    for (int i = 0; i<2; i++){
+                        SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
+                        smallFlyer.centerAtActor(flyer);
+                    }
                 }
             }
             
@@ -389,18 +389,12 @@ public class LevelScreen3 extends BaseScreen
 
         if ( health <= 0 )
         {
-            //messageLabel.setText("Game over...");
-            //messageLabel.setColor(Color.RED);
-            //messageLabel.setFontScale(2);
-            //messageLabel.setVisible(true);
             dialogBox.setText("You Lose! Press any key to return to the main menu.");
             dialogBox.setVisible(true);
             gameOverSound.play();
             hero.remove();
             gameOver = true;
-
         }
-
         
         for (BaseActor arrow : BaseActor.getList(mainStage, "Arrow"))
         {
@@ -411,10 +405,10 @@ public class LevelScreen3 extends BaseScreen
                     flyer.remove();
                     arrow.remove();
                     flyerKillSound.play();
-                    SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-                    smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
+                    for (int i = 0; i<2; i++){
+                        SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
+                        smallFlyer.centerAtActor(flyer);
+                    }
                 }
 
             for(BaseActor smallFlyer : BaseActor.getList(mainStage, "SmallFlyer"))

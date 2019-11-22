@@ -295,14 +295,10 @@ public class LevelScreen4 extends BaseScreen
                 {
                     giantFlyer.remove();
                     flyerKillSound.play();
-                    LargeFlyer largeFlyer = new LargeFlyer(0,0,mainStage);
-                    largeFlyer.centerAtActor(giantFlyer);
-                    largeFlyer = new LargeFlyer(0,0,mainStage);
-                    largeFlyer.centerAtActor(giantFlyer);
-                    largeFlyer = new LargeFlyer(0,0,mainStage);
-                    largeFlyer.centerAtActor(giantFlyer);
-                    largeFlyer = new LargeFlyer(0,0,mainStage);
-                    largeFlyer.centerAtActor(giantFlyer);
+                    for (int i = 0; i<4; i++){
+                        LargeFlyer largeFlyer = new LargeFlyer(0,0,mainStage);
+                        largeFlyer.centerAtActor(giantFlyer);
+                    }
                 }
             }
             
@@ -312,14 +308,11 @@ public class LevelScreen4 extends BaseScreen
                 {
                     largeFlyer.remove();
                     flyerKillSound.play();
-                    Flyer flyer = new Flyer(0,0,mainStage);
-                    flyer.centerAtActor(largeFlyer);
-                    flyer = new Flyer(0,0,mainStage);
-                    flyer.centerAtActor(largeFlyer);
-                    flyer = new Flyer(0,0,mainStage);
-                    flyer.centerAtActor(largeFlyer);
-                    flyer = new Flyer(0,0,mainStage);
-                    flyer.centerAtActor(largeFlyer);
+                    for (int i = 0; i<4; i++){
+                        Flyer flyer = new Flyer(0,0,mainStage);
+                        flyer.centerAtActor(largeFlyer);
+                    }
+                    
                 }
             }
             
@@ -329,14 +322,11 @@ public class LevelScreen4 extends BaseScreen
                 {
                     flyer.remove();
                     flyerKillSound.play();
-                    SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-                    smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-                    smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-                    smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
+                    for (int i = 0; i<4; i++){
+                        SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
+                        smallFlyer.centerAtActor(flyer);
+                    }
+
                 }
             }
             
@@ -491,18 +481,12 @@ public class LevelScreen4 extends BaseScreen
 
         if ( health <= 0 )
         {
-            //messageLabel.setText("Game over...");
-            //messageLabel.setColor(Color.RED);
-            //messageLabel.setFontScale(2);
-            //messageLabel.setVisible(true);
             dialogBox.setText("You Lose! Press any key to return to the main menu.");
             dialogBox.setVisible(true);
             gameOverSound.play();
             hero.remove();
             gameOver = true;
-
         }
-
         
         for (BaseActor arrow : BaseActor.getList(mainStage, "Arrow"))
         {
@@ -513,14 +497,10 @@ public class LevelScreen4 extends BaseScreen
                     arrow.remove();
                     giantFlyer.remove();
                     flyerKillSound.play();
-                    LargeFlyer largeFlyer = new LargeFlyer(0,0,mainStage);
-                    largeFlyer.centerAtActor(giantFlyer);
-                    largeFlyer = new LargeFlyer(0,0,mainStage);
-                    largeFlyer.centerAtActor(giantFlyer);
-                    largeFlyer = new LargeFlyer(0,0,mainStage);
-                    largeFlyer.centerAtActor(giantFlyer);
-                    largeFlyer = new LargeFlyer(0,0,mainStage);
-                    largeFlyer.centerAtActor(giantFlyer);
+                    for (int i = 0; i<4; i++){
+                        LargeFlyer largeFlyer = new LargeFlyer(0,0,mainStage);
+                        largeFlyer.centerAtActor(giantFlyer);
+                    }
                 }
             }
             
@@ -531,14 +511,10 @@ public class LevelScreen4 extends BaseScreen
                     arrow.remove();
                     largeFlyer.remove();
                     flyerKillSound.play();
-                    Flyer flyer = new Flyer(0,0,mainStage);
-                    flyer.centerAtActor(largeFlyer);
-                    flyer = new Flyer(0,0,mainStage);
-                    flyer.centerAtActor(largeFlyer);
-                    flyer = new Flyer(0,0,mainStage);
-                    flyer.centerAtActor(largeFlyer);
-                    flyer = new Flyer(0,0,mainStage);
-                    flyer.centerAtActor(largeFlyer);
+                    for (int i = 0; i<4; i++){
+                        Flyer flyer = new Flyer(0,0,mainStage);
+                        flyer.centerAtActor(largeFlyer);
+                    }
                 }
             }
             
@@ -549,14 +525,10 @@ public class LevelScreen4 extends BaseScreen
                     flyer.remove();
                     arrow.remove();
                     flyerKillSound.play();
-                    SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-                    smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-                    smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-                    smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
+                    for (int i = 0; i<4; i++){
+                        SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
+                        smallFlyer.centerAtActor(flyer);
+                    }
                 }   
             }
                 

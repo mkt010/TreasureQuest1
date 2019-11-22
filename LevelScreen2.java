@@ -265,11 +265,10 @@ public class LevelScreen2 extends BaseScreen
                 {
                     flyer.remove();
                     flyerKillSound.play();
-                    SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-                    smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-
+                    for (int i = 0; i<2; i++){
+                        SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
+                        smallFlyer.centerAtActor(flyer);
+                    }
                 }
             }
             
@@ -412,10 +411,10 @@ public class LevelScreen2 extends BaseScreen
                     flyer.remove();
                     arrow.remove();
                     flyerKillSound.play();
-                    SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
-                    smallFlyer = new SmallFlyer(0,0,mainStage);
-                    smallFlyer.centerAtActor(flyer);
+                    for (int i = 0; i<2; i++){
+                        SmallFlyer smallFlyer = new SmallFlyer(0,0,mainStage);
+                        smallFlyer.centerAtActor(flyer);
+                    }
                 }
 
             for(BaseActor smallFlyer : BaseActor.getList(mainStage, "SmallFlyer"))
