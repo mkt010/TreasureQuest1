@@ -342,14 +342,14 @@ public class LevelScreen extends BaseScreen
 
         if ( health <= 0 )
         {
-            //messageLabel.setText("Game over...");
-            //messageLabel.setColor(Color.RED);
-            //messageLabel.setFontScale(2);
-            //messageLabel.setVisible(true);
             dialogBox.setText("You Lose! Press any key to return to the main menu.");
             dialogBox.setVisible(true);
             gameOverSound.play();
             hero.remove();
+            Smoke smoke = new Smoke(0,0,mainStage);
+            smoke.centerAtActor(hero);
+            Grave grave = new Grave(0,0,mainStage);
+            grave.centerAtActor(hero);
             gameOver = true;
 
         }
