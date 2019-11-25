@@ -31,7 +31,7 @@ public class LevelMenu extends BaseScreen
         background.loadTexture( "assets/MainMenu1.png" );
         background.setSize(800,600);
         
-        TextButton level1Button = new TextButton("Level 1",BaseGame.textButtonStyle);
+        TextButton level1Button = new TextButton("Easy",BaseGame.textButtonStyle);
 
         level1Button.addListener(
             (Event e) ->
@@ -47,7 +47,7 @@ public class LevelMenu extends BaseScreen
                 }
         );
         
-        TextButton level2Button = new TextButton("Level 2",BaseGame.textButtonStyle);
+        TextButton level2Button = new TextButton("Medium",BaseGame.textButtonStyle);
 
         level2Button.addListener(
             (Event e) ->
@@ -63,7 +63,7 @@ public class LevelMenu extends BaseScreen
                 }
         );
         
-                TextButton level3Button = new TextButton("Level 3",BaseGame.textButtonStyle);
+                TextButton level3Button = new TextButton("Hard",BaseGame.textButtonStyle);
 
         level3Button.addListener(
             (Event e) ->
@@ -79,7 +79,7 @@ public class LevelMenu extends BaseScreen
                 }
         );
         
-        TextButton level4Button = new TextButton("Level 4",BaseGame.textButtonStyle);
+        TextButton level4Button = new TextButton("Boss",BaseGame.textButtonStyle);
 
         level4Button.addListener(
             (Event e) ->
@@ -110,13 +110,13 @@ public class LevelMenu extends BaseScreen
             }
         );
          
-        float w = level4Button.getWidth();
+        float w = level2Button.getWidth();
          
-        uiTable.add(level1Button).width(w).padLeft(25);
-        uiTable.add(level2Button).width(w);
+        uiTable.add(level1Button).width(w).padLeft(20);
+        uiTable.add(level2Button);
         
         uiTable.add(level3Button).width(w);
-        uiTable.add(level4Button);
+        uiTable.add(level4Button).width(w);
         uiTable.row().expandX();
 
         uiTable.add(exitButton).colspan(8).center().width(w).padTop(10);
